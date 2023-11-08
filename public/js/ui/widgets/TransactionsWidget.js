@@ -12,9 +12,6 @@ class TransactionsWidget {
    * необходимо выкинуть ошибку.
    * */
   constructor( element ) {
-    if (!element) {
-      throw new Error ('ошибка');
-    };
     this.element = element;
     this.registerEvents();
   }
@@ -25,13 +22,13 @@ class TransactionsWidget {
    * экземпляра окна
    * */
   registerEvents() {
-    this.element.addEventListener('click', (event) => {
-      if (event.target.classList.contains('create-income-button')) {
-        App.getModal('newIncome').open();
-      }
-      if (event.target.classList.contains('create-expense-button')) {
-        App.getModal('newExpense').open();
-      }
+    const newIncomeBtn = this.element.querySelector('.create-income-button');
+    newIncomeBtn.addEventListener('click', () => {
+      App.getModal('newIncome').open();
+    });
+    const newExpenseBtn = this.element.querySelector('.create-expense-button');
+    newExpenseBtn.addEventListener('click', () => {
+      App.getModal('newExpense').open();
     })
   }
 }

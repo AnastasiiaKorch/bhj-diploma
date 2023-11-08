@@ -13,10 +13,10 @@ class Modal {
    * */
   constructor(element){
     if (!element) {
-      throw new Error('Ошибка!');
-    };
-      this.element = element;
-      this.registerEvents();
+      throw new Error('Get empty element.');
+    }
+    this.element = element;
+    this.registerEvents();
   }
 
   /**
@@ -25,21 +25,21 @@ class Modal {
    * (с помощью метода Modal.onClose)
    * */
   registerEvents() {
-    const dismiss = this.element.querySelectorAll('[data-dismiss="modal"]');
-      dismiss.forEach(item => {
-        item.addEventListener('click', (event) => {
-          this.onClose(event);
-        });
-      });
+    const closeBtns = this.element.querySelectorAll('[data-dismiss="modal"]');
+
+    for (let i = 0; i < closeBtns.length; i++) {
+      closeBtns.item(i).addEventListener('click', (e) => {
+        this.onClose(e);
+      })
+    }
   }
 
   /**
    * Срабатывает после нажатия на элементы, закрывающие окно.
    * Закрывает текущее окно (Modal.close())
    * */
-  onClose(e) {
-    e.preventDefault();
-      this.close();
+  onClose() {
+    this.close();
   }
   /**
    * Открывает окно: устанавливает CSS-свойство display
